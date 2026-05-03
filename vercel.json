@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "Staff-Leave-MS-Django-Python/wsgi.py",
+      "src": "Staff-Leave-MS-Django-Python/staffleave/slms/slms/wsgi.py",
       "use": "@vercel/python",
       "config": { "maxLambdaSize": "15mb", "runtime": "python3.12" }
     }
@@ -10,7 +10,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "Staff-Leave-MS-Django-Python/wsgi.py"
+      "dest": "Staff-Leave-MS-Django-Python/staffleave/slms/slms/wsgi.py"
     }
   ]
 }
