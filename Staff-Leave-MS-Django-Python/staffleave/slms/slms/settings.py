@@ -4,10 +4,14 @@ from pathlib import Path
 # Build paths
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY
-SECRET_KEY = 'django-insecure-8j+nu3y0_ab%bhda_(x3=8&!a+s^!czew#-b2m#1m(-g#$uaya'
 
-DEBUG = False
+# 🔐 SECURITY (UPDATED)
+SECRET_KEY = os.environ.get(
+    'SECRET_KEY',
+    'fallback-secret-key-for-local-dev'
+)
+
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = ['*']
 
@@ -63,7 +67,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'slms.wsgi.application'
 
 
-# Database (SQLite works fine for now)
+# Database (SQLite)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -96,7 +100,7 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (FIXED)
+# Static files
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
