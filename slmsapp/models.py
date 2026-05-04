@@ -10,7 +10,7 @@ class CustomUser(AbstractUser):
     #     (1,'admin'),
     #     (2,'staff')
     # }
-    user_type = models.CharField(choices=USER,max_length=50,default=1)
+user_type = models.CharField(choices=USER, max_length=50, default='1')
 
     profile_pic = models.ImageField(upload_to='media/profile_pic')
 
