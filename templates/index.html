@@ -1,104 +1,107 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<main class="mn-inner">
-    <div class="middle-content">
+<div class="row">
 
-        <!-- Cards -->
-        <div class="row no-m-t no-m-b">
-
-            <div class="col s12 m12 l4">
-                <div class="card stats-card">
-                    <div class="card-content">
-                        <span class="card-title">Total Registered Employees</span>
-                        <span class="stats-counter">
-                            <span class="counter">{{ empcount }}</span>
-                        </span>
-                    </div>
-                </div>
+    <!-- CARD 1 -->
+    <div class="col s12 m4">
+        <div class="card stats-card">
+            <div class="card-content center">
+                <h6>Total Registered Employees</h6>
+                <h4>{{ empcount }}</h4>
             </div>
-
-            <div class="col s12 m12 l4">
-                <div class="card stats-card">
-                    <div class="card-content">
-                        <span class="card-title">Listed Departments</span>
-                        <span class="stats-counter">
-                            <span class="counter">{{ dptcount }}</span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col s12 m12 l4">
-                <div class="card stats-card">
-                    <div class="card-content">
-                        <span class="card-title">Leave Types</span>
-                        <span class="stats-counter">
-                            <span class="counter">{{ leavtypcount }}</span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-
         </div>
+    </div>
 
-        <!-- Table -->
-        <div class="row no-m-t no-m-b">
-            <div class="col s12 m12 l12">
-                <div class="card invoices-card">
-                    <div class="card-content">
+    <!-- CARD 2 -->
+    <div class="col s12 m4">
+        <div class="card stats-card">
+            <div class="card-content center">
+                <h6>Listed Departments</h6>
+                <h4>{{ dptcount }}</h4>
+            </div>
+        </div>
+    </div>
 
-                        <span class="card-title">Latest Leave Applications</span>
+    <!-- CARD 3 -->
+    <div class="col s12 m4">
+        <div class="card stats-card">
+            <div class="card-content center">
+                <h6>Leave Types</h6>
+                <h4>{{ leavtypcount }}</h4>
+            </div>
+        </div>
+    </div>
 
-                        <table class="display responsive-table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Employee Name</th>
-                                    <th>Leave Type</th>
-                                    <th>Posting Date</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
+</div>
 
-                            <tbody>
-                                {% for result in results %}
-                                <tr>
-                                    <td>{{ forloop.counter }}</td>
 
-                                    <td>
-                                        {{ result.staff_id.admin.first_name }}
-                                        {{ result.staff_id.admin.last_name }}
-                                    </td>
+<!-- TABLE -->
+<div class="row">
 
-                                    <td>{{ result.leave_type }}</td>
-                                    <td>{{ result.created_at }}</td>
+    <div class="col s12">
 
-                                    <td>
-                                        {% if result.status == 1 %}
-                                            <span style="color: green;">Approved</span>
-                                        {% elif result.status == 2 %}
-                                            <span style="color: red;">Rejected</span>
-                                        {% else %}
-                                            <span style="color: blue;">Pending</span>
-                                        {% endif %}
-                                    </td>
-                                </tr>
-                                {% empty %}
-                                <tr>
-                                    <td colspan="5">No data available</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
+        <div class="card">
+            <div class="card-content">
 
-                        </table>
+                <h5>Latest Leave Applications</h5>
 
-                    </div>
-                </div>
+                <table id="leaveTable" class="striped highlight">
+
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Employee Name</th>
+                            <th>Leave Type</th>
+                            <th>Posting Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for result in results %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+
+                            <td>
+                                {{ result.staff_id.admin.first_name }}
+                                {{ result.staff_id.admin.last_name }}
+                            </td>
+
+                            <td>{{ result.leave_type }}</td>
+                            <td>{{ result.created_at }}</td>
+
+                            <td>
+
+                                {% if result.status == 1 %}
+                                    <span class="green-text">Approved</span>
+
+                                {% elif result.status == 2 %}
+                                    <span class="red-text">Rejected</span>
+
+                                {% else %}
+                                    <span class="blue-text">Pending</span>
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5" class="center">No data available</td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
             </div>
         </div>
 
     </div>
-</main>
+
+</div>
 
 {% endblock %}
