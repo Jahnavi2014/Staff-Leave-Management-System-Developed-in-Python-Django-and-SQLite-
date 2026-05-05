@@ -3617,14 +3617,10 @@ body.search-app .search-input input:-ms-input-placeholder {
 }
 
 .signup-page {
-    background: url('../images/mountains3.png') no-repeat;
+    background: url('../images/mountains1.png') no-repeat;
     background-size: cover;
 }
 
-.pattern-lock-screen {
-    background: url('../images/mountains5.png') no-repeat;
-    background-size: cover;
-}
 
 .pattern-lock-screen .mn-content {
     background: rgba(0,0,0,0.54);
