@@ -1,107 +1,102 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="row">
-
-    <!-- CARD 1 -->
-    <div class="col s12 m4">
-        <div class="card stats-card">
-            <div class="card-content center">
-                <h6>Total Registered Employees</h6>
-                <h4>{{ empcount }}</h4>
-            </div>
-        </div>
-    </div>
-
-    <!-- CARD 2 -->
-    <div class="col s12 m4">
-        <div class="card stats-card">
-            <div class="card-content center">
-                <h6>Listed Departments</h6>
-                <h4>{{ dptcount }}</h4>
-            </div>
-        </div>
-    </div>
-
-    <!-- CARD 3 -->
-    <div class="col s12 m4">
-        <div class="card stats-card">
-            <div class="card-content center">
-                <h6>Leave Types</h6>
-                <h4>{{ leavtypcount }}</h4>
-            </div>
-        </div>
-    </div>
-
-</div>
+            <main class="mn-inner">
+                <div class="middle-content">
+                    <div class="row no-m-t no-m-b">
+                    <div class="col s12 m12 l4">
+                        <div class="card stats-card">
+                            <div class="card-content">
+                            
+                                <span class="card-title">Totle Regd Employee</span>
+                                <span class="stats-counter">
 
 
-<!-- TABLE -->
-<div class="row">
+                                    <span class="counter"><?php echo htmlentities($empcount);?></span></span>
+                            </div>
+                            <div id="sparkline-bar"></div>
+                        </div>
+                    </div>
+                        <div class="col s12 m12 l4">
+                        <div class="card stats-card">
+                            <div class="card-content">
+                            
+                                <span class="card-title">Listed Departments </span>
+                         
+                                <span class="stats-counter"><span class="counter"><?php echo htmlentities($dptcount);?></span></span>
+                            </div>
+                            <div id="sparkline-line"></div>
+                        </div>
+                    </div>
+                    <div class="col s12 m12 l4">
+                        <div class="card stats-card">
+                            <div class="card-content">
+                                <span class="card-title">Listed leave Type</span>
+                                 
+                                <span class="stats-counter"><span class="counter"><?php echo htmlentities($leavtypcount);?></span></span>
+                      
+                            </div>
+                            <div class="progress stats-card-progress">
+                                <div class="determinate" style="width: 70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 
+                    <div class="row no-m-t no-m-b">
+                        <div class="col s12 m12 l12">
+                            <div class="card invoices-card">
+                                <div class="card-content">
+                                 
+                                    <span class="card-title">Latest Leave Applications</span>
+                             <table id="example" class="display responsive-table ">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th width="200">Employe Name</th>
+                                            <th width="120">Leave Type</th>
 
-    <div class="col s12">
+                                             <th width="180">Posting Date</th>                 
+                                            <th>Status</th>
+                                            <th align="center">Action</th>
+                                        </tr>
+                                    </thead>
+                                 
+                                    <tbody>
+  
 
-        <div class="card">
-            <div class="card-content">
+                                        <tr>
+                                            <td> <b><?php echo htmlentities($cnt);?></b></td>
+                                              <td><a href="" target="_blank"><?php echo htmlentities($result->FirstName." ".$result->LastName);?>(<?php echo htmlentities($result->EmpId);?>)</a></td>
+                                            <td><?php echo htmlentities($result->LeaveType);?></td>
+                                            <td><?php echo htmlentities($result->PostingDate);?></td>
+                                                                       <td>
+                                             ?>
+                                                 <span style="color: green">Approved</span>
+                                                 
+                                                <span style="color: red">Not Approved</span>
+                                                 
+ <span style="color: blue">waiting for approval</span>
 
-                <h5>Latest Leave Applications</h5>
 
-                <table id="leaveTable" class="striped highlight">
 
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Employee Name</th>
-                            <th>Leave Type</th>
-                            <th>Posting Date</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
+                                             </td>
 
-                    <tbody>
-
-                        {% for result in results %}
-                        <tr>
-                            <td>{{ forloop.counter }}</td>
-
-                            <td>
-                                {{ result.staff_id.admin.first_name }}
-                                {{ result.staff_id.admin.last_name }}
-                            </td>
-
-                            <td>{{ result.leave_type }}</td>
-                            <td>{{ result.created_at }}</td>
-
-                            <td>
-
-                                {% if result.status == 1 %}
-                                    <span class="green-text">Approved</span>
-
-                                {% elif result.status == 2 %}
-                                    <span class="red-text">Rejected</span>
-
-                                {% else %}
-                                    <span class="blue-text">Pending</span>
-                                {% endif %}
-
-                            </td>
-
-                        </tr>
-                        {% empty %}
-                        <tr>
-                            <td colspan="5" class="center">No data available</td>
-                        </tr>
-                        {% endfor %}
-
-                    </tbody>
-
-                </table>
-
-            </div>
+          <td>
+           <td><a href="leave-details.php?leaveid=<?php echo htmlentities($result->lid);?>" class="waves-effect waves-light btn blue m-b-xs"  > View Details</a></td>
+                                    </tr>
+                                      
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              
+            </main>
+          
         </div>
 
-    </div>
-
-</div>
-
-{% endblock %}
+        
+        {% endblock %}
